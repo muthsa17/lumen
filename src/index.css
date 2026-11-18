@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Design system LUMEN, sumber: Figma Color Styles (1001:53) & Typography (1001:114). Lihat spec §7. */
+@theme {
+  --font-heading: "Poppins", sans-serif;
+  --font-sans: "Nunito", sans-serif;
+
+  --color-ink: #181818;
+  --color-maroon: #3b0000;
+
+  --color-green-light: #e6f9f1;
+  --color-green-light-hover: #daf6ea;
+  --color-green-light-active: #b2edd4;
+  --color-green: #05af6c;
+  --color-green-hover: #059e61;
+  --color-green-active: #048c56;
+  --color-green-dark: #059357;
+  --color-green-dark-hover: #16824d;
+  --color-green-dark-active: #035834;
+  --color-green-darker: #08401f;
+
+  --color-yellow-light: #fffaf0;
+  --color-yellow-light-hover: #fff8e8;
+  --color-yellow-light-active: #fff1d0;
+  --color-yellow: #ffd166;
+  --color-yellow-hover: #e6bc5c;
+  --color-yellow-active: #cca752;
+  --color-yellow-dark: #bf9d4d;
+  --color-yellow-dark-hover: #997d3d;
+  --color-yellow-dark-active: #735e2e;
+  --color-yellow-darker: #594924;
+
+  --color-neutral-light: #f4f4f4;
+  --color-neutral-light-hover: #efefef;
+  --color-neutral-light-active: #dddddd;
+  --color-neutral: #929292;
+  --color-neutral-hover: #838383;
+  --color-neutral-active: #757575;
+  --color-neutral-dark: #6e6e6e;
+  --color-neutral-dark-active: #585858;
+  --color-neutral-darker: #333333;
+
+  --color-danger: #f1323e;
+  --color-warning: #ffa200;
+  --color-success: #12aa50;
+
+  --text-h1: 24px;
+  --text-h1--line-height: 1.2;
+  --text-h2: 20px;
+  --text-h2--line-height: 1.2;
+  --text-h3: 18px;
+  --text-h3--line-height: 1.2;
+  --text-h4: 16px;
+  --text-h4--line-height: 1.2;
+  --text-h5: 14px;
+  --text-h5--line-height: 1.2;
+  --text-body-1: 16px;
+  --text-body-1--line-height: 1.2;
+  --text-body-2: 14px;
+  --text-body-2--line-height: 1.2;
+  --text-body-3: 12px;
+  --text-body-3--line-height: 1.2;
+  --text-body-4: 10px;
+  --text-body-4--line-height: 1.2;
+
+  /* shadcn already derives radius-xl from --radius, so the 24px container radius gets its own name. */
+  --radius-panel: 24px;
+  --shadow-lg: 0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808;
+}
+
+@theme inline {
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --radius: 8px;
+  --background: #fefefe;
+  --foreground: #181818;
+  --card: #ffffff;
+  --card-foreground: #181818;
+  --popover: #ffffff;
+  --popover-foreground: #181818;
+  --primary: #05af6c;
+  /* White on #05AF6C is ~2.9:1 (fails WCAG AA); dark text is ~6.2:1. Spec §7.5. */
+  --primary-foreground: #181818;
+  --secondary: #ffd166;
+  --secondary-foreground: #181818;
+  --muted: #f4f4f4;
+  --muted-foreground: #6e6e6e;
+  --accent: #e6f9f1;
+  --accent-foreground: #08401f;
+  --destructive: #f1323e;
+  --border: #dddddd;
+  --input: #dddddd;
+  --ring: #05af6c;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  h1, h2, h3, h4, h5 {
+    @apply font-heading text-ink;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  a[href],
+  label[for],
+  summary,
+  select {
+    cursor: pointer;
+  }
+  :disabled {
+    cursor: not-allowed;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
