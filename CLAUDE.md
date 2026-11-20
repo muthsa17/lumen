@@ -70,8 +70,22 @@ Stack: React 19 + Vite 8 + TypeScript 7, Tailwind CSS v4 + shadcn/ui (paket `rad
 
 ## Design system
 
-Token ada di blok `@theme` di `src/index.css` (sumber: Figma Color Styles dan Typography). Tidak ada `tailwind.config.js`. Pakai token yang ada (`bg-green`, `text-ink`, `text-body-1`, `text-h3`, `font-heading` Poppins, `font-sans` Nunito), jangan hex mentah. Teks putih di atas `#05AF6C` gagal kontras WCAG AA: gunakan teks `ink` di atas green, atau putih di atas `green-dark-hover`. Detail di spec §7.5.
+Token ada di blok `@theme` di `src/index.css` (sumber: Figma `cEhdAQvduiD4OwOHK5UQdh`, node `100:95` Foundations dan `100:237` Component Library). Tidak ada `tailwind.config.js`. Pakai token yang ada (`bg-mint`, `bg-emerald`, `text-emerald-deep`, `text-ink`, `text-ink-soft`, `text-hero`, `text-section`, `text-card-title`, `text-body`, `text-caption`), jangan hex mentah. Satu font: Poppins (`font-sans`). `#059669` (`emerald`) gagal kontras AA untuk teks di atas putih maupun mint, jadi hanya untuk elemen non-teks; teks hijau dan tombol utama memakai `emerald-deep` (`#047857`). Detail di spec §7.5.
 
 ## Deploy
 
 Vercel, framework Vite. `vercel.json` me-rewrite semua rute ke `index.html` (SPA). Env var diisi di Vercel untuk Production dan Preview. URL Vercel harus didaftarkan di Supabase Auth > URL Configuration agar link verifikasi email benar.
+
+## Agent skills
+
+### Issue tracker
+
+Issue dan spec disimpan sebagai file markdown lokal di `.scratch/<fitur>/`. Lihat `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Lima label default (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), ditulis sebagai baris `Status:` di tiap file issue. Lihat `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: satu `GLOSSARY.md` dan `docs/adr/` di root repo. Lihat `docs/agents/domain.md`.

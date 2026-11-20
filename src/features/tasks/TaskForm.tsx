@@ -23,24 +23,24 @@ export function TaskForm({ onAdd }: { onAdd: TasksApi['addTask'] }) {
 
   return (
     <form onSubmit={submit} className="@container rounded-xl border bg-card p-4 sm:p-5" aria-labelledby="task-form-title">
-      <h3 id="task-form-title" className="text-h3 font-semibold">
+      <h3 id="task-form-title" className="text-card-title font-semibold">
         Tugas besar baru
       </h3>
       <div className="mt-3 grid gap-3 @md:grid-cols-2 @3xl:grid-cols-[2fr_1fr_auto_auto] @3xl:items-end">
         <div className="space-y-1.5 @md:col-span-2 @3xl:col-span-1">
-          <label htmlFor="task-title" className="text-body-2 font-semibold">
+          <label htmlFor="task-title" className="text-body font-semibold">
             Judul tugas
           </label>
           <Input id="task-title" required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Contoh: Makalah PKN" />
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="task-course" className="text-body-2 font-semibold">
+          <label htmlFor="task-course" className="text-body font-semibold">
             Mata kuliah <span className="font-normal text-muted-foreground">(opsional)</span>
           </label>
           <Input id="task-course" value={course} onChange={(e) => setCourse(e.target.value)} />
         </div>
         <div className="space-y-1.5">
-          <label htmlFor="task-deadline" className="text-body-2 font-semibold">
+          <label htmlFor="task-deadline" className="text-body font-semibold">
             Tenggat <span className="font-normal text-muted-foreground">(opsional)</span>
           </label>
           <Input id="task-deadline" type="date" value={deadline} onChange={(e) => setDeadline(e.target.value)} />

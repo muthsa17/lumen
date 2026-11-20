@@ -10,8 +10,8 @@ import { cn } from '@/lib/utils'
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'inline-flex h-11 items-center rounded-lg px-4 text-body-1 font-semibold transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none',
-    isActive ? 'bg-green-light text-green-darker' : 'text-neutral-dark hover:bg-muted hover:text-ink',
+    'inline-flex h-11 items-center rounded-lg px-4 text-body font-semibold transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none',
+    isActive ? 'bg-mint text-emerald-deep' : 'text-muted-foreground hover:bg-muted hover:text-ink',
   )
 
 export function AppHeader() {
@@ -26,7 +26,7 @@ export function AppHeader() {
   return (
     <header className="border-b bg-card">
       <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3 sm:px-6">
-        <Link to="/app" className="rounded-md font-heading text-h2 font-bold text-ink focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none">
+        <Link to="/app" className="rounded-md text-section font-bold text-ink focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none">
           LUMEN
         </Link>
 
@@ -56,8 +56,8 @@ export function AppHeader() {
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="font-heading text-h3">Keluar dari mode tamu?</DialogTitle>
-            <DialogDescription className="text-body-2">
+            <DialogTitle className="text-card-title">Keluar dari mode tamu?</DialogTitle>
+            <DialogDescription className="text-body">
               Data tamu akan hilang permanen setelah keluar. Daftarkan email dulu agar data tersimpan.
             </DialogDescription>
           </DialogHeader>

@@ -39,8 +39,8 @@ export function UpgradeAccountDialog({ open, onOpenChange, onPasswordSet }: Prop
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="font-heading text-h3">{verified ? 'Buat password' : 'Simpan datamu dengan email'}</DialogTitle>
-          <DialogDescription className="text-body-2">
+          <DialogTitle className="text-card-title">{verified ? 'Buat password' : 'Simpan datamu dengan email'}</DialogTitle>
+          <DialogDescription className="text-body">
             {verified
               ? `Email ${user?.email} sudah terverifikasi. Buat password untuk masuk lagi nanti.`
               : pending
@@ -49,7 +49,7 @@ export function UpgradeAccountDialog({ open, onOpenChange, onPasswordSet }: Prop
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={submit} className="space-y-3">
-          <label htmlFor="upgrade-field" className="text-body-2 font-semibold">
+          <label htmlFor="upgrade-field" className="text-body font-semibold">
             {verified ? 'Password baru' : 'Email'}
           </label>
           <Input

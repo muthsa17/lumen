@@ -6,7 +6,7 @@ export function RequireAuth() {
   const { session, loading } = useAuth()
   if (loading) {
     return (
-      <p role="status" className="p-6 text-body-1 text-muted-foreground">
+      <p role="status" className="p-6 text-body text-muted-foreground">
         Memuat…
       </p>
     )

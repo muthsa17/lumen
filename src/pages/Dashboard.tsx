@@ -26,7 +26,7 @@ export default function Dashboard() {
 
         <div className="lg:sticky lg:top-6">
           {loading ? (
-            <p role="status" className="rounded-panel bg-green-light p-6 text-body-1 text-neutral-darker">
+            <p role="status" className="rounded-panel bg-mint p-6 text-body text-ink-soft">
               Memuat langkah hari ini…
             </p>
           ) : error ? null : (
@@ -42,24 +42,24 @@ export default function Dashboard() {
         </div>
 
         <section aria-labelledby="tasks-title" className="space-y-4">
-          <h2 id="tasks-title" className="text-h2 font-bold">
+          <h2 id="tasks-title" className="text-section font-bold">
             Semua tugas
           </h2>
           <TaskForm onAdd={api.addTask} />
           {loading ? (
-            <p role="status" className="text-body-1 text-muted-foreground">
+            <p role="status" className="text-body text-muted-foreground">
               Memuat tugas…
             </p>
           ) : error ? (
             <div role="alert" className="rounded-xl border border-danger bg-card p-4">
-              <p className="text-body-1 font-semibold">Tugas gagal dimuat.</p>
-              <p className="mt-1 text-body-2 text-muted-foreground">{error}. Periksa koneksi internet, lalu coba lagi.</p>
+              <p className="text-body font-semibold">Tugas gagal dimuat.</p>
+              <p className="mt-1 text-body text-muted-foreground">{error}. Periksa koneksi internet, lalu coba lagi.</p>
               <Button variant="outline" className="mt-3" onClick={reload}>
                 Muat ulang
               </Button>
             </div>
           ) : tasks.length === 0 ? (
-            <p className="rounded-xl border border-dashed p-6 text-center text-body-1 text-muted-foreground">
+            <p className="rounded-xl border border-dashed p-6 text-center text-body text-muted-foreground">
               Belum ada tugas. Tulis satu tugas besar di atas, lalu pecah jadi langkah kecil.
             </p>
           ) : (

@@ -10,15 +10,15 @@ export function BreakDialog({ tip, breakMin, onStartBreak, onSkip }: Props) {
     <Dialog open={tip !== null} onOpenChange={(o) => !o && onSkip()}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-heading text-h2">Waktunya jeda</DialogTitle>
-          <DialogDescription className="text-body-2">Sesi fokus selesai. Istirahat sebentar sebelum lanjut.</DialogDescription>
+          <DialogTitle className="text-section">Waktunya jeda</DialogTitle>
+          <DialogDescription className="text-body">Sesi fokus selesai. Istirahat sebentar sebelum lanjut.</DialogDescription>
         </DialogHeader>
         {tip && Icon && (
-          <div className="flex gap-3 rounded-lg bg-yellow-light p-4 ring-1 ring-yellow">
-            <Icon aria-hidden="true" className="mt-0.5 size-7 shrink-0 text-yellow-darker" />
+          <div className="flex gap-3 rounded-lg bg-cream p-4 ring-1 ring-gold">
+            <Icon aria-hidden="true" className="mt-0.5 size-7 shrink-0 text-ink" />
             <div>
-              <p className="font-heading text-h3 font-semibold text-ink">{tip.title}</p>
-              <p className="mt-1 text-body-1 text-neutral-darker">{tip.desc}</p>
+              <p className="text-card-title font-semibold text-ink">{tip.title}</p>
+              <p className="mt-1 text-body text-ink-soft">{tip.desc}</p>
             </div>
           </div>
         )}

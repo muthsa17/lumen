@@ -4,7 +4,7 @@
 - **Status:** Draft, menunggu review tim
 - **Konteks:** GCJ 2026 (DevGirls), Kelompok 6, target Progres 1 SoftDev (penentuan teknologi, repo, struktur awal)
 - **Deadline pengumpulan:** 20 November 2026
-- **Sumber:** PRD LUMEN, Laporan Progres Kelompok 6, Brainstorm Ide Kelompok 6, Figma design system (`S3ccwOWDXWoCeQf4zHadF3`, node `1001:53` dan `1001:114`)
+- **Sumber:** PRD LUMEN, Laporan Progres Kelompok 6, Brainstorm Ide Kelompok 6, Figma design system (`cEhdAQvduiD4OwOHK5UQdh`, node `100:95` dan `100:237`)
 
 ## 1. Tujuan dan batasan
 
@@ -200,215 +200,82 @@ vercel.json
 
 ## 7. Design System
 
-**Sumber:** Figma `S3ccwOWDXWoCeQf4zHadF3`, frame **Color Styles** (`1001:53`) dan **Typography** (`1001:114`).
-
-**Aturan pembacaan:** di beberapa swatch, label hex tidak cocok dengan warna isinya. Spec ini memakai **warna fill/variabel Figma** sebagai acuan. Pengecualian yang sudah disepakati tim tercantum di 7.1.
+**Sumber:** Figma `cEhdAQvduiD4OwOHK5UQdh` (LUMEN GCJ 2026), frame **Design System Foundations** (`100:95`) dan **UI Component Library** (`100:237`). File lama `S3ccwOWDXWoCeQf4zHadF3` tidak dipakai lagi. Penyimpangan dari Figma demi kontras tercatat di 7.5.
 
 ### 7.1 Warna
 
-**Base dan teks**
-
-| Token | Hex | Catatan |
-|---|---|---|
-| `white` | `#FEFEFE` | Latar utama |
-| `black` | `#252525` | |
-| `ink` | `#181818` | Warna teks utama (frame Typography) |
-| `maroon` | `#3B0000` | Aksen khusus, bukan warna tombol utama |
-
-**Primary (hijau)**
-
-| Token | Hex | Sumber |
-|---|---|---|
-| `green-light` | `#E6F9F1` | variabel |
-| `green-light-hover` | `#DAF6EA` | variabel |
-| `green-light-active` | `#B2EDD4` | variabel |
-| `green` (**primary**) | `#05AF6C` | variabel `Foundation/Green/Normal` |
-| `green-hover` | `#059E61` | label swatch (fill-nya duplikat) |
-| `green-active` | `#048C56` | label swatch (fill-nya duplikat) |
-| `green-dark` | `#059357` | variabel |
-| `green-dark-hover` | `#16824D` | variabel |
-| `green-dark-active` | `#035834` | variabel |
-| `green-darker` | `#08401F` | variabel `Dark` |
-
-**Secondary (kuning).** Label di Figma keliru, jadi semua nilai diambil dari variabel.
-
-| Token | Hex |
-|---|---|
-| `yellow-light` | `#FFFAF0` |
-| `yellow-light-hover` | `#FFF8E8` |
-| `yellow-light-active` | `#FFF1D0` |
-| `yellow` (**secondary**) | `#FFD166` |
-| `yellow-hover` | `#E6BC5C` |
-| `yellow-active` | `#CCA752` |
-| `yellow-dark` | `#BF9D4D` |
-| `yellow-dark-hover` | `#997D3D` |
-| `yellow-dark-active` | `#735E2E` |
-| `yellow-darker` | `#594924` |
-
-**Neutral**
-
-| Token | Hex |
-|---|---|
-| `neutral-light` | `#F4F4F4` |
-| `neutral-light-hover` | `#EFEFEF` |
-| `neutral-light-active` | `#DDDDDD` |
-| `neutral` | `#929292` |
-| `neutral-hover` | `#838383` |
-| `neutral-active` | `#757575` |
-| `neutral-dark` | `#6E6E6E` |
-| `neutral-dark-active` | `#585858` |
-| `neutral-darker` | `#333333` |
-
-**Status**
-
-| Token | Hex | Catatan |
-|---|---|---|
-| `danger` | `#F1323E` | |
-| `warning` | `#FFA200` | Diambil dari fill. Label Figma menulis `#FFC837` |
-| `success` | `#12AA50` | Variabel `Primary` di Figma |
-
-**Gradient**
-- **Black Gradient** = `linear-gradient(0deg, rgba(37,37,37,0) 0%, rgba(80,80,80,0.8) 89.6%)`.
-- **Green Gradient belum terdefinisi.** Isinya masih placeholder abu-abu `#A9A9A9`. Tunggu nilai dari UI/UX.
+| Token Tailwind | Nama Figma | Hex | Pemakaian |
+|---|---|---|---|
+| `ink` | Charcoal Black | `#252525` | Heading |
+| `ink-soft` (= `foreground`) | Primary Text | `#333333` | Teks utama |
+| `muted-foreground` | Muted Text | `#6E6E6E` (Figma `#757575`, lihat 7.5) | Teks sekunder, ghost button |
+| `background` / `muted` | App Background | `#F4F4F4` | Latar halaman |
+| `card` / `popover` | Pure White | `#FEFEFE` | Kartu, dialog |
+| `border` | Subtle Border | `#E5E7EB` | Border kartu, track progress |
+| `input` | Input Border | `#D1D5DB` | Border input, outline button |
+| `mint` (= `accent`) | Mint Tint | `#E6F7F0` | Latar terpilih, badge |
+| `soft-mint` | Soft Mint | `#A7F3D0` | Garis pemisah di atas mint |
+| `emerald-hover` | Emerald Hover | `#10B981` | Belum dipakai |
+| `emerald` (= `ring`) | Primary Emerald | `#059669` | Elemen non-teks: progress, checkbox, border terpilih, fokus |
+| `emerald-deep` (= `primary`) | Deep Emerald | `#047857` | Tombol utama, teks hijau |
+| `emerald-deeper` | (di luar Figma) | `#065F46` | Hover/active tombol utama |
+| `cream` | Pale Cream | `#FEF9C3` | Kotak tips, badge "complete", latar CTA Landing |
+| `gold` (= `secondary`) | Soft Gold | `#FDE68A` | Tombol secondary, ring kotak tips |
+| `amber` | Warm Amber | `#F59E0B` | Aksen motif StepMark |
+| `danger` (= `destructive`) | Danger Red | `#EF4444` | Border tombol hapus, error |
+| `warning` / `success` | Warning Amber / Success Green | `#F59E0B` / `#10B981` | Status |
 
 ### 7.2 Tipografi
 
-- **Headline:** Poppins, line-height 1.2.
-- **Body:** Nunito, line-height 1.2.
-- Kedua font dimuat dari Google Fonts.
+Satu keluarga: **Poppins** (400/500/600/700, Google Fonts). Nunito tidak dipakai lagi.
 
-| Token | Font | Weight | Ukuran |
+| Kelas | Figma | Ukuran / line-height | Weight |
 |---|---|---|---|
-| `h1` | Poppins | 700 | 24px |
-| `h2` | Poppins | 700 | 20px |
-| `h3` | Poppins | 600 | 18px |
-| `h4` | Poppins | 700 | 16px |
-| `h5` | Poppins | 700 | 14px |
-| `body-1` | Nunito | 500 / 600 | 16px |
-| `body-2` | Nunito | 500 / 600 | 14px |
-| `body-3` | Nunito | 500 / 600 | 12px |
-| `body-4` | Nunito | 500 / 600 | 10px |
+| `text-hero` | Heading 1 (Hero) | 28 / 36px | 700 |
+| `text-section` | Heading 2 (Section) | 20 / 28px | 700 |
+| `text-card-title` | Heading 3 (Card Title) | 16 / 24px | 600 |
+| `text-body` | Body Regular | 14 / 22px | 400 |
+| `text-caption` | Caption & Badges | 12 / 16px | 500 |
 
-- `body-4` (10px) hanya untuk keterangan kecil. Teks yang dibaca minimal 12px.
-- Ukuran body disamakan ke 16/14/12/10. Label kolom SemiBold di Figma (18/16/14/12) diabaikan.
+- Figma juga punya **Timer Display** (48/64px Bold, tabular). Timer di halaman Focus sengaja lebih besar (72–96px) karena menjadi titik fokus layar, jadi tidak dibuat token.
+- Input memakai 16px (bukan 14px) supaya Safari iOS tidak zoom saat input difokus.
 
 ### 7.3 Radius, shadow, spacing
 
 | Token | Nilai |
 |---|---|
-| `radius` (card, input, tombol) | 8px |
-| `radius-xl` (container besar) | 24px |
+| `--radius` / `rounded-lg` (tombol, input, baris micro-task) | 10px |
+| `rounded-xl` (kartu, opsi energi) | 14px (turunan shadcn) |
+| `rounded-panel` (panel besar, dialog) | 16px |
 | `shadow-lg` | `0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808` |
 | Spacing | Skala bawaan Tailwind (kelipatan 4px) |
 | Dark mode | Tidak ada untuk MVP |
 
-### 7.4 Implementasi di `src/index.css`
+### 7.4 Implementasi
 
-`shadcn init` akan membuat blok `:root` sendiri. Setelah init:
-- **Ganti** nilai variabel shadcn dengan yang di bawah.
-- **Pertahankan** variabel lain yang dibuat shadcn (misalnya `--chart-*`, `--sidebar-*`).
-- **Hapus** blok `.dark`, karena dark mode tidak dipakai.
+Semua nilai ada di `src/index.css`: blok `@theme` (warna, tipografi, radius) dan `:root` (variabel shadcn). Tidak ada `tailwind.config.js`.
 
-```css
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&family=Poppins:wght@600;700;800&display=swap");
-@import "tailwindcss";
+Komponen dari Component Library:
 
-@theme {
-  --font-heading: "Poppins", sans-serif;
-  --font-sans: "Nunito", sans-serif;
+| Figma | Kode |
+|---|---|
+| Button (Primary, Secondary, Ghost, Disabled) | `ui/button.tsx`: `default`, `outline`, `ghost`; disabled primary = latar mint. Varian `secondary` (gold) dipakai untuk ajakan upgrade akun tamu. |
+| Text input (Default, Focus) | `ui/input.tsx`: border `input`, fokus border + ring 1px `emerald` (≈ 2px) |
+| Status badge (Active, Energy, Complete) | `ui/badge.tsx`: `default` (mint), `complete` (cream), `muted` (chip abu-abu) |
+| Linear progress | `ui/progress.tsx`: track 8px `border`, fill `emerald` |
+| Micro-task row (Default, Selected, Completed) | `StepRow` di `features/tasks/TaskCard.tsx`. Badge durasi diganti label hari (tidak ada field durasi). "Selected" = `focus-within`. Tombol ubah/hapus tetap ada. |
+| Energy check-in option | `features/checkin/CheckinDialog.tsx`: kartu ditumpuk vertikal (3 level), radio dekoratif, `aria-pressed` membawa state |
 
-  --color-ink: #181818;
-  --color-maroon: #3b0000;
+### 7.5 Catatan aksesibilitas (penyimpangan dari Figma)
 
-  --color-green-light: #e6f9f1;
-  --color-green-light-hover: #daf6ea;
-  --color-green-light-active: #b2edd4;
-  --color-green: #05af6c;
-  --color-green-hover: #059e61;
-  --color-green-active: #048c56;
-  --color-green-dark: #059357;
-  --color-green-dark-hover: #16824d;
-  --color-green-dark-active: #035834;
-  --color-green-darker: #08401f;
-
-  --color-yellow-light: #fffaf0;
-  --color-yellow-light-hover: #fff8e8;
-  --color-yellow-light-active: #fff1d0;
-  --color-yellow: #ffd166;
-  --color-yellow-hover: #e6bc5c;
-  --color-yellow-active: #cca752;
-  --color-yellow-dark: #bf9d4d;
-  --color-yellow-dark-hover: #997d3d;
-  --color-yellow-dark-active: #735e2e;
-  --color-yellow-darker: #594924;
-
-  --color-neutral-light: #f4f4f4;
-  --color-neutral-light-hover: #efefef;
-  --color-neutral-light-active: #dddddd;
-  --color-neutral: #929292;
-  --color-neutral-hover: #838383;
-  --color-neutral-active: #757575;
-  --color-neutral-dark: #6e6e6e;
-  --color-neutral-dark-active: #585858;
-  --color-neutral-darker: #333333;
-
-  --color-danger: #f1323e;
-  --color-warning: #ffa200;
-  --color-success: #12aa50;
-
-  --text-h1: 24px;  --text-h1--line-height: 1.2;
-  --text-h2: 20px;  --text-h2--line-height: 1.2;
-  --text-h3: 18px;  --text-h3--line-height: 1.2;
-  --text-h4: 16px;  --text-h4--line-height: 1.2;
-  --text-h5: 14px;  --text-h5--line-height: 1.2;
-  --text-body-1: 16px; --text-body-1--line-height: 1.2;
-  --text-body-2: 14px; --text-body-2--line-height: 1.2;
-  --text-body-3: 12px; --text-body-3--line-height: 1.2;
-  --text-body-4: 10px; --text-body-4--line-height: 1.2;
-
-  --radius-xl: 24px;
-  --shadow-lg: 0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808;
-}
-
-/* Pemetaan ke variabel semantik shadcn */
-:root {
-  --radius: 8px;
-  --background: #fefefe;
-  --foreground: #181818;
-  --card: #ffffff;
-  --card-foreground: #181818;
-  --popover: #ffffff;
-  --popover-foreground: #181818;
-  --primary: #05af6c;
-  --primary-foreground: #181818; /* lihat 7.5: putih di atas #05AF6C gagal kontras */
-  --secondary: #ffd166;
-  --secondary-foreground: #181818;
-  --muted: #f4f4f4;
-  --muted-foreground: #6e6e6e;
-  --accent: #e6f9f1;
-  --accent-foreground: #08401f;
-  --destructive: #f1323e;
-  --border: #dddddd;
-  --input: #dddddd;
-  --ring: #05af6c;
-}
-```
-
-**Contoh pemakaian:**
-- Teks dan warna: `font-heading text-h1`, `text-body-2 font-semibold`, `bg-green-light`, `hover:bg-green-hover`.
-- Komponen shadcn otomatis memakai `--primary` dan variabel semantik lainnya.
-
-### 7.5 Catatan aksesibilitas (perlu konfirmasi UI/UX)
-
-| Kombinasi | Rasio kontras | Status |
+| Kombinasi di Figma | Rasio | Keputusan |
 |---|---|---|
-| Teks putih di atas `#05AF6C` | ≈ 2.9:1 | Gagal WCAG AA, baik untuk teks normal (4.5:1) maupun teks besar (3:1) |
-| Teks `#181818` di atas `#05AF6C` | ≈ 6.2:1 | Lulus (default di 7.4) |
-| Teks putih di atas `#16824D` (`green-dark-hover`) | ≈ 4.9:1 | Lulus |
-| Teks putih di atas `#F1323E` (`danger`) | ≈ 4:1 | Hanya aman untuk teks ≥ 18px atau bold ≥ 14px |
+| Teks putih di atas `#059669` (tombol primary) | 3.74:1, gagal AA | Tombol memakai `#047857` (5.44:1). Teks `#252525` di atas `#059669` juga gagal (4.07:1). |
+| Teks `#059669` di atas mint `#E6F7F0` (badge, kartu energi terpilih) | 3.4:1, gagal AA | Teks memakai `#047857` (4.94:1) |
+| Muted Text `#757575` di atas `#F4F4F4` | 4.19:1, gagal AA | Memakai `#6E6E6E` (4.64:1 di `#F4F4F4`, 4.6:1 di mint) |
+| Border checkbox dan radio abu-abu muda | ≈ 1.5:1, gagal 3:1 (non-teks) | Border unchecked memakai `muted-foreground` |
 
-- **Opsi tombol utama:** teks `#181818` di atas `#05AF6C`, atau teks putih di atas `#16824D`. Pilihan akhirnya diputuskan bersama UI/UX.
-- **Tombol danger:** pastikan label tombol memakai teks ≥ 18px atau bold ≥ 14px.
+- Tombol danger tidak memakai teks di atas merah: bahaya ditandai lewat border `danger`, teks tetap `ink`.
 
 ## 8. Testing
 

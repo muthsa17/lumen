@@ -33,9 +33,9 @@ export default function Focus() {
       <main className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-10">
         <h1 className="sr-only">Sesi fokus</h1>
 
-        <section aria-label="Timer" className="rounded-panel bg-green-light px-4 py-8 text-center sm:px-10 sm:py-12">
-          <p className="text-body-1 font-semibold text-green-darker">{phase === 'focus' ? 'Sesi fokus' : 'Jeda'}</p>
-          <p className="mt-2 font-heading text-[4.5rem] leading-none font-bold tracking-tight text-ink tabular-nums sm:text-[6rem]" role="timer" aria-live="off">
+        <section aria-label="Timer" className="rounded-panel bg-mint px-4 py-8 text-center sm:px-10 sm:py-12">
+          <p className="text-body font-semibold text-emerald-deep">{phase === 'focus' ? 'Sesi fokus' : 'Jeda'}</p>
+          <p className="mt-2 text-[4.5rem] leading-none font-bold tracking-tight text-emerald-deep tabular-nums sm:text-[6rem]" role="timer" aria-live="off">
             {mmss(shownMs)}
           </p>
           <Progress value={elapsedPct} aria-label="Waktu berjalan" className="mx-auto mt-6 h-2 max-w-sm bg-card" />
@@ -55,34 +55,34 @@ export default function Focus() {
 
         <section aria-label="Konteks sesi" className="mt-6 space-y-4">
           <div className="rounded-xl border bg-card p-4">
-            <p className="text-body-2 text-muted-foreground">Langkah sekarang</p>
+            <p className="text-body text-muted-foreground">Langkah sekarang</p>
             {loading ? (
-              <p role="status" className="mt-1 text-body-1 text-muted-foreground">
+              <p role="status" className="mt-1 text-body text-muted-foreground">
                 Memuat…
               </p>
             ) : current ? (
               <>
-                <p className="mt-1 font-heading text-h3 font-semibold break-words text-ink">{current.title}</p>
-                {currentTask && <p className="text-body-2 text-muted-foreground">{currentTask.title}</p>}
+                <p className="mt-1 text-card-title font-semibold break-words text-ink">{current.title}</p>
+                {currentTask && <p className="text-body text-muted-foreground">{currentTask.title}</p>}
               </>
             ) : (
-              <p className="mt-1 text-body-1">
+              <p className="mt-1 text-body">
                 Tidak ada langkah tersisa untuk hari ini.{' '}
-                <Link to="/app" className="font-semibold text-green-dark-hover underline underline-offset-4">
+                <Link to="/app" className="font-semibold text-emerald-deep underline underline-offset-4">
                   Tambah langkah
                 </Link>
               </p>
             )}
           </div>
 
-          <p className="text-body-2 text-neutral-darker">
+          <p className="text-body text-ink-soft">
             Energi {ENERGY_COPY[level].label.toLowerCase()}
             {checkin.level === null && ' (belum check-in)'}: fokus {rules.focusMin} menit, jeda {rules.breakMin} menit.{' '}
-            <Link to="/app" className="font-semibold text-green-dark-hover underline underline-offset-4">
+            <Link to="/app" className="font-semibold text-emerald-deep underline underline-offset-4">
               Ubah energi
             </Link>
           </p>
-          {note && <p className="text-body-2 text-neutral-darker">{note}</p>}
+          {note && <p className="text-body text-ink-soft">{note}</p>}
         </section>
       </main>
 

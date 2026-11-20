@@ -29,3 +29,6 @@ docs/pdf/
 .env.local
 .vitest
 .superpowers/
+
+.agents
+.claude/
