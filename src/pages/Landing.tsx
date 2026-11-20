@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BatteryFull,
   Brain,
+  Menu,
   BatteryLow,
   BatteryMedium,
   ChevronDown,
@@ -15,9 +16,10 @@ import {
   Sprout,
   Timer,
   Wind,
+  X,
   type LucideIcon,
 } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { Link } from 'react-router'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/features/auth/auth-context'
@@ -149,6 +151,7 @@ function PreviewCard() {
 
 export default function Landing() {
   const { session, loading } = useAuth()
+  const [menuOpen, setMenuOpen] = useState(false)
   // Pengguna yang sudah login tidak perlu daftar lagi, jadi semua CTA ajakan membawanya ke dasbor.
   const signupTo = session ? '/app' : '/register'
 
@@ -186,13 +189,35 @@ export default function Landing() {
             ))}
           </nav>
           <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-expanded={menuOpen}
+              aria-controls="menu-mobile"
+              aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+              onClick={() => setMenuOpen((o) => !o)}
+              onKeyDown={(e) => e.key === 'Escape' && setMenuOpen(false)}
+              className={cn(
+                'grid size-11 place-items-center rounded-md text-ink md:hidden',
+                focusRing,
+              )}
+            >
+              {menuOpen ? (
+                <X aria-hidden="true" className="size-5" />
+              ) : (
+                <Menu aria-hidden="true" className="size-5" />
+              )}
+            </button>
             {loading ? null : session ? (
               <Button asChild>
                 <Link to="/app">Buka Aplikasi</Link>
               </Button>
             ) : (
               <>
-                <Button asChild variant="ghost">
+                <Button
+                  asChild
+                  variant="ghost"
+                  className="hidden sm:inline-flex"
+                >
                   <Link to="/login">Masuk</Link>
                 </Button>
                 <Button asChild>
@@ -202,6 +227,43 @@ export default function Landing() {
             )}
           </div>
         </div>
+        {menuOpen && (
+          <nav
+            id="menu-mobile"
+            aria-label="Bagian halaman"
+            className="border-t border-border bg-card md:hidden"
+          >
+            <ul className={cn(container, 'py-2')}>
+              {NAV_LINKS.map((l) => (
+                <li key={l.id}>
+                  <a
+                    href={`#${l.id}`}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      'flex h-11 items-center rounded-md text-body font-medium text-ink-soft hover:text-emerald-deep',
+                      focusRing,
+                    )}
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+              {!loading && !session && (
+                <li className="sm:hidden">
+                  <Link
+                    to="/login"
+                    className={cn(
+                      'flex h-11 items-center rounded-md text-body font-medium text-ink-soft hover:text-emerald-deep',
+                      focusRing,
+                    )}
+                  >
+                    Masuk
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </nav>
+        )}
       </header>
 
       <main>

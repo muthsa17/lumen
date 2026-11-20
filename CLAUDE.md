@@ -43,7 +43,7 @@ npx prettier --write <file>            # format (tidak ada script npm)
 
 Node ≥ 22.22 (disarankan 24). Butuh `.env.local` berisi `VITE_SUPABASE_URL` dan `VITE_SUPABASE_PUBLISHABLE_KEY` (lihat `.env.example`). `src/lib/supabase.ts` melempar error saat import jika keduanya kosong. Semua `VITE_*` ikut ke browser: jangan pernah pakai service_role key.
 
-Tes hanya mencakup logika murni di `src/lib/*.test.ts`. UI dan integrasi Supabase dicek manual di browser (mobile dan desktop). `vite.config.ts` memaksa `TZ=Asia/Jakarta` saat Vitest supaya bug "hari ini" versi UTC tertangkap.
+Tes hanya mencakup logika murni di `src/lib/*.test.ts`. UI dan integrasi Supabase tidak punya tes otomatis, jadi agen wajib mengeceknya sendiri di browser (desktop dan lebar mobile) sebelum menyatakan tiket UI selesai: jalankan `npm run dev`, buka rute yang diubah lewat skill `orca-cli` (browser tertanam Orca) atau `run`, lalu bandingkan dengan screenshot Figma, uji keyboard (Tab, Enter, Esc), dan klik alur utamanya. Jangan mencentang kriteria tiket yang belum dicek di browser; tulis di laporan apa yang belum bisa dicek (misalnya butuh `.env.local` atau akun Supabase). `vite.config.ts` memaksa `TZ=Asia/Jakarta` saat Vitest supaya bug "hari ini" versi UTC tertangkap.
 
 ## Arsitektur
 

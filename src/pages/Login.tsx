@@ -1,21 +1,26 @@
 import { useState, type FormEvent } from 'react'
+import { AlertCircle } from 'lucide-react'
 import { Link, Navigate, useNavigate } from 'react-router'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
-import { StepMark } from '@/components/StepMark'
+import { AuthSplitLayout } from '@/features/auth/AuthSplitLayout'
 import { useAuth } from '@/features/auth/auth-context'
+import { PasswordField } from '@/features/auth/PasswordField'
+import { setRemember } from '@/lib/auth-storage'
 import { supabase } from '@/lib/supabase'
-import { cn } from '@/lib/utils'
 
-type Mode = 'masuk' | 'daftar'
+const LINK =
+  'rounded font-semibold text-emerald-deep hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none'
 
 export default function Login() {
   const { session, loading } = useAuth()
   const navigate = useNavigate()
-  const [mode, setMode] = useState<Mode>('masuk')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [remember, setRememberState] = useState(true)
+  const [failed, setFailed] = useState(false)
   const [busy, setBusy] = useState(false)
 
   if (!loading && session) return <Navigate to="/app" replace />
@@ -23,106 +28,125 @@ export default function Login() {
   async function submit(e: FormEvent) {
     e.preventDefault()
     setBusy(true)
-    const { data, error } =
-      mode === 'masuk'
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password })
+    setFailed(false)
+    setRemember(remember)
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
     setBusy(false)
-    if (error) return toast.error(error.message)
-    if (data.session) return navigate('/app')
-    // "Confirm email" is on by default in Supabase, so signUp returns no session until the link is clicked.
-    toast('Cek email kamu untuk verifikasi, lalu masuk.')
-    setMode('masuk')
+    if (error) {
+      if (error.code === 'invalid_credentials') return setFailed(true)
+      return toast.error('Belum bisa masuk saat ini. Coba lagi sebentar lagi.')
+    }
+    navigate('/app')
   }
 
   async function tryAsGuest() {
     setBusy(true)
+    setRemember(true)
     const { error } = await supabase.auth.signInAnonymously()
     setBusy(false)
-    if (error) return toast.error(error.message)
+    if (error)
+      return toast.error(
+        'Mode tamu belum bisa dibuka. Coba lagi sebentar lagi.',
+      )
     navigate('/app')
   }
 
   return (
-    <div className="min-h-dvh bg-mint/60">
-      <header className="mx-auto flex max-w-5xl items-center px-4 py-4 sm:px-6">
-        <Link to="/" className="rounded-md text-section font-bold text-ink focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none">
-          LUMEN
-        </Link>
-      </header>
+    <AuthSplitLayout blurb="Selamat datang kembali. Tanpa rasa bersalah karena sempat beristirahat. Ruang fokusmu selalu tenang dan siap saat kamu siap.">
+      <div className="mt-10">
+        <h1 className="text-hero font-bold text-ink">Selamat datang kembali</h1>
+        <p className="mt-1 text-body text-ink-soft">
+          Siap untuk sedikit fokus hari ini?
+        </p>
 
-      <main className="mx-auto grid max-w-5xl gap-8 px-4 pb-12 sm:px-6 md:grid-cols-[1fr_minmax(0,26rem)] md:items-center md:gap-12 md:pt-8">
-        <section className="hidden md:block">
-          <StepMark className="mb-6" />
-          <p className="text-[2rem] leading-tight font-bold text-ink">Satu langkah kecil dulu. Sisanya menyusul.</p>
-          <p className="mt-4 max-w-md text-body leading-relaxed text-ink-soft">
-            Pecah tugas besar jadi langkah harian, atur fokus sesuai energimu hari ini, dan istirahat sebelum capek.
-          </p>
-        </section>
+        <form onSubmit={submit} className="mt-6 space-y-4">
+          <div className="space-y-1.5">
+            <label htmlFor="email" className="text-body font-medium">
+              Alamat email
+            </label>
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="nama@kampus.ac.id"
+            />
+          </div>
 
-        <section className="rounded-panel bg-card p-5 shadow-lg sm:p-8" aria-labelledby="auth-title">
-          <h1 id="auth-title" className="text-hero font-bold">
-            {mode === 'masuk' ? 'Masuk ke LUMEN' : 'Buat akun LUMEN'}
-          </h1>
-
-          <div className="mt-4 grid grid-cols-2 gap-1 rounded-lg bg-muted p-1" role="group" aria-label="Pilih mode">
-            {(['masuk', 'daftar'] as const).map((m) => (
-              <button
-                key={m}
-                type="button"
-                aria-pressed={mode === m}
-                onClick={() => setMode(m)}
-                className={cn(
-                  'h-11 rounded-md text-body font-semibold text-muted-foreground transition-colors hover:text-ink focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none',
-                  mode === m && 'bg-card text-ink shadow-sm',
-                )}
+          <div className="space-y-1.5">
+            <label htmlFor="password" className="text-body font-medium">
+              Kata sandi
+            </label>
+            <PasswordField
+              id="password"
+              autoComplete="current-password"
+              required
+              aria-invalid={failed}
+              aria-describedby={failed ? 'login-error' : undefined}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {failed && (
+              <p
+                id="login-error"
+                role="alert"
+                className="flex items-center gap-1.5 text-caption text-amber-900"
               >
-                {m === 'masuk' ? 'Masuk' : 'Daftar'}
-              </button>
-            ))}
+                <AlertCircle className="size-3" aria-hidden /> Email atau kata
+                sandi tidak cocok. Tarik napas dan coba lagi.
+              </p>
+            )}
           </div>
 
-          <form onSubmit={submit} className="mt-6 space-y-4">
-            <div className="space-y-1.5">
-              <label htmlFor="email" className="text-body font-semibold">
-                Email
-              </label>
-              <Input id="email" type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="nama@kampus.ac.id" />
-            </div>
-            <div className="space-y-1.5">
-              <label htmlFor="password" className="text-body font-semibold">
-                Password
-              </label>
-              <Input
-                id="password"
-                type="password"
-                autoComplete={mode === 'masuk' ? 'current-password' : 'new-password'}
-                required
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="remember"
+                checked={remember}
+                onCheckedChange={(v) => setRememberState(v === true)}
               />
-              {mode === 'daftar' && <p className="text-caption text-muted-foreground">Minimal 6 karakter.</p>}
+              <label htmlFor="remember" className="text-body text-ink-soft">
+                Ingat saya
+              </label>
             </div>
-            <Button type="submit" disabled={busy} className="w-full">
-              {busy ? 'Memproses…' : mode === 'masuk' ? 'Masuk' : 'Buat akun'}
-            </Button>
-          </form>
-
-          <div className="my-6 flex items-center gap-3 text-caption text-muted-foreground">
-            <span className="h-px flex-1 bg-border" />
-            atau
-            <span className="h-px flex-1 bg-border" />
+            <Link to="/forgot-password" className={`${LINK} text-caption`}>
+              Lupa kata sandi?
+            </Link>
           </div>
 
-          <Button type="button" variant="outline" disabled={busy} onClick={tryAsGuest} className="w-full">
-            Coba sebagai tamu
+          <Button type="submit" disabled={busy} className="w-full">
+            {busy ? 'Memproses…' : 'Masuk'}
           </Button>
-          <p className="mt-2 text-center text-caption text-muted-foreground">
-            Tanpa daftar. Daftarkan email nanti supaya datamu tidak hilang.
-          </p>
-        </section>
-      </main>
-    </div>
+        </form>
+
+        <div className="my-6 flex items-center gap-3 text-caption text-muted-foreground">
+          <span className="h-px flex-1 bg-border" />
+          atau
+          <span className="h-px flex-1 bg-border" />
+        </div>
+
+        <Button
+          type="button"
+          variant="outline"
+          disabled={busy}
+          onClick={tryAsGuest}
+          className="w-full"
+        >
+          Coba dulu tanpa akun
+        </Button>
+
+        <p className="mt-6 border-t border-border pt-6 text-center text-body text-ink-soft">
+          Belum punya akun?{' '}
+          <Link to="/register" className={LINK}>
+            Buat akun
+          </Link>
+        </p>
+      </div>
+    </AuthSplitLayout>
   )
 }
