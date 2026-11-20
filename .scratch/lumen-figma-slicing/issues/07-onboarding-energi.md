@@ -1,5 +1,12 @@
 # 07: Kartu onboarding energi
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:1094`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-1094
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Saat membuka dasbor dan belum check-in hari ini, pengguna melihat kartu "Bagaimana energimu saat ini?" (frame `166:1094`). Kartu ini menggantikan dialog check-in yang lama.
 
 **Blocked by:** None (can start immediately)

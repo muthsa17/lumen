@@ -1,5 +1,13 @@
 # 05: Lupa kata sandi dan atur kata sandi baru
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:906`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-906
+  - `166:1031`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-1031
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Pengguna yang lupa kata sandi meminta tautan di `/forgot-password` (frame `166:906`), membuka tautan dari email, lalu menyimpan kata sandi baru di `/reset-password` (frame `166:1031`) dan langsung masuk ke dasbor.
 
 **Blocked by:** 03

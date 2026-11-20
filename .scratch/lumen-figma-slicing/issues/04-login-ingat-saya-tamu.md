@@ -1,5 +1,13 @@
 # 04: Login, Ingat saya, dan link tamu
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:937`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-937
+  - `166:789`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-789
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Pengguna masuk di `/login` (frame `166:937`). Kalau "Ingat saya" tidak dicentang, sesi hilang saat tab ditutup. Pengunjung juga bisa mencoba sebagai tamu, dan upgrade akun tamu tetap berfungsi.
 
 **Blocked by:** 03

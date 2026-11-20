@@ -1,5 +1,11 @@
 # 01: Prefactor: migrasi 0002, tipe database, dan catatan dokumen
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma: tidak ada (tiket non-UI)
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Fondasi data untuk semua tiket lain, dalam satu file SQL yang cukup dijalankan pemilik repo sekali di SQL Editor. Aplikasi lama tetap berjalan tanpa perubahan perilaku.
 
 **Blocked by:** None (can start immediately)

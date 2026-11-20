@@ -1,5 +1,12 @@
 # 11: Sesi fokus: jeda, atur ulang, akhiri, dan pencatatan
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:1173`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-1173
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Di `/focus` (frame `166:1173`), pengguna fokus pada langkah terpilih dengan cincin waktu tersisa. Sesi bisa dijeda, dilanjutkan, diulang, atau diakhiri lebih awal. Setiap sesi tercatat agar halaman Progres terisi.
 
 **Blocked by:** 01, 08

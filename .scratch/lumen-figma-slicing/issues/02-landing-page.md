@@ -1,5 +1,12 @@
 # 02: Landing page
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:449`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-449
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Pengunjung melihat landing page sesuai frame Figma `166:449`: nav dengan anchor, hero dengan mock kartu sesi, fitur, cara kerja, mode energi, FAQ accordion, CTA, dan footer. Semua tombol ajakan mengarah ke pendaftaran; pengguna yang sudah login diarahkan ke dasbor.
 
 **Blocked by:** None (can start immediately)

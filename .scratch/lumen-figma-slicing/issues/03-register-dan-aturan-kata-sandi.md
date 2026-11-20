@@ -1,5 +1,12 @@
 # 03: Register dan aturan kata sandi
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:789`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-789
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Pengguna baru mendaftar di `/register` (frame `166:789`) dengan nama lengkap, email, kata sandi, dan konfirmasi. Saat mengetik, checklist syarat dan meter kekuatan kata sandi ikut berubah. Nama tersimpan sehingga LUMEN bisa menyapa pengguna dengan nama.
 
 **Blocked by:** None (can start immediately)

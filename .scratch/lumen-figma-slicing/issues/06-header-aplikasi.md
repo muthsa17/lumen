@@ -1,5 +1,14 @@
 # 06: Header aplikasi
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `166:274`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-274
+  - `166:1329`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=166-1329
+  - `93:276`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=93-276
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Di semua halaman aplikasi, pengguna melihat header sesuai Figma: logo, tanggal hari ini, nav Dasbor/Progres dengan penanda aktif, pill "Energi Mental" untuk mengubah energi hari ini, dan avatar dengan menu Profil/Keluar.
 
 **Blocked by:** None (can start immediately)

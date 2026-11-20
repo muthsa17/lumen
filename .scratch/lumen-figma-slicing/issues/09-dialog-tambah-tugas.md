@@ -1,5 +1,12 @@
 # 09: Dialog Tambah Tugas dan saran langkah
 
+**Konteks (baca dulu):**
+- Spec: `.scratch/lumen-figma-slicing/spec.md`
+- Peta frame dan penyimpangan dari Figma: `.scratch/lumen-figma-slicing/figma-frames.md` (bagian frame terkait)
+- Figma (file key `cEhdAQvduiD4OwOHK5UQdh`):
+  - `167:1622`: https://www.figma.com/design/cEhdAQvduiD4OwOHK5UQdh/LUMEN-GCJ-2026--Copy-?node-id=167-1622
+- Aturan repo: `CLAUDE.md` (tanpa `git commit`/`git push`, token design system, aksesibilitas)
+
 **What to build:** Pengguna menambah tugas besar lewat dialog (frame `167:1622`): judul, kategori, tenggat, prioritas, catatan, dan langkah kecil bermenit yang bisa diurutkan. Pengguna bisa meminta saran langkah, lalu menyimpan sebagai draf atau sebagai tugas aktif.
 
 **Blocked by:** 01, 08
