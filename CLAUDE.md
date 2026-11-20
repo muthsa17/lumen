@@ -20,7 +20,7 @@ Tiga fitur inti (PRD):
 2. **Adaptive Focus Timer**: timer gaya Pomodoro. Saat fokus selesai, muncul dialog jeda dengan saran peregangan/pernapasan, suara, dan notifikasi browser.
 3. **Energy Check-in**: energi harian (`high`/`medium`/`low`) menentukan durasi fokus/jeda dan jumlah micro-task di "Fokus hari ini".
 
-Di luar scope: kolaborasi real-time antar akun dan integrasi kalender eksternal. Ditunda: Google OAuth, CAPTCHA, statistik sesi, i18n, Service Worker.
+Di luar scope: kolaborasi real-time antar akun dan integrasi kalender eksternal. Ditunda: Google OAuth, CAPTCHA, i18n, Service Worker.
 
 Semua teks UI berbahasa Indonesia dengan nada lembut dan tidak menghakimi. Pertahankan itu.
 
@@ -51,7 +51,7 @@ Stack: React 19 + Vite 8 + TypeScript 7, Tailwind CSS v4 + shadcn/ui (paket `rad
 
 **Tidak ada backend sendiri.** Browser bicara langsung ke Supabase lewat custom hook (`src/hooks/useTasks.ts`, `useCheckin.ts`). Tanpa TanStack Query: hook memegang state lokal dan memperbaruinya secara optimistis setelah query sukses; error ditampilkan dengan `toast.error`. Keamanan data sepenuhnya bergantung pada RLS di `supabase/migrations/0001_init.sql`: setiap tabel punya `user_id default auth.uid()` dan policy "own rows", jadi insert tidak perlu mengirim `user_id`.
 
-**Skema** (`tasks` → `micro_tasks` cascade, `energy_checkins` unik per `(user_id, date)`). `src/database.types.ts` saat ini ditulis manual. Kalau mengubah skema, buat file migrasi baru di `supabase/migrations/` dan perbarui tipe ini (atau generate ulang, lihat README).
+**Skema** (`tasks` → `micro_tasks` cascade, `energy_checkins` unik per `(user_id, date)`, `focus_sessions` dengan `micro_task_id` set null saat langkah dihapus). Migrasi `0002` menambah `tasks.category/priority/notes/status` (kolom text dengan check, judul ≤60 `NOT VALID`), `micro_tasks.minutes/done_at` (`done_at` diisi klien; baris lama null, hitungan selesai tetap pakai `is_done`), tabel `focus_sessions`, dan bucket publik `avatars` (tulis hanya di folder `<user_id>/`). `src/database.types.ts` saat ini ditulis manual. Kalau mengubah skema, buat file migrasi baru di `supabase/migrations/` dan perbarui tipe ini (atau generate ulang, lihat README).
 
 **Alur provider dan routing** (`src/main.tsx`, `src/routes.tsx`):
 - `AuthProvider` membungkus `RouterProvider` dan menyediakan `session`, `user`, `isGuest`, `loading`.

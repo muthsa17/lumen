@@ -12,6 +12,10 @@ export type Database = {
           course: string | null
           deadline: string | null
           created_at: string
+          category: string
+          priority: string
+          notes: string | null
+          status: string
         }
         Insert: {
           id?: string
@@ -20,6 +24,10 @@ export type Database = {
           course?: string | null
           deadline?: string | null
           created_at?: string
+          category?: string
+          priority?: string
+          notes?: string | null
+          status?: string
         }
         Update: {
           id?: string
@@ -28,6 +36,10 @@ export type Database = {
           course?: string | null
           deadline?: string | null
           created_at?: string
+          category?: string
+          priority?: string
+          notes?: string | null
+          status?: string
         }
         Relationships: []
       }
@@ -40,6 +52,8 @@ export type Database = {
           planned_date: string
           is_done: boolean
           position: number
+          minutes: number
+          done_at: string | null
         }
         Insert: {
           id?: string
@@ -49,6 +63,8 @@ export type Database = {
           planned_date: string
           is_done?: boolean
           position?: number
+          minutes?: number
+          done_at?: string | null
         }
         Update: {
           id?: string
@@ -58,6 +74,8 @@ export type Database = {
           planned_date?: string
           is_done?: boolean
           position?: number
+          minutes?: number
+          done_at?: string | null
         }
         Relationships: [
           {
@@ -89,6 +107,41 @@ export type Database = {
           level?: Database['public']['Enums']['energy_level']
         }
         Relationships: []
+      }
+      focus_sessions: {
+        Row: {
+          id: string
+          user_id: string
+          micro_task_id: string | null
+          started_at: string
+          ended_at: string
+          minutes: number
+        }
+        Insert: {
+          id?: string
+          user_id?: string
+          micro_task_id?: string | null
+          started_at: string
+          ended_at: string
+          minutes: number
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          micro_task_id?: string | null
+          started_at?: string
+          ended_at?: string
+          minutes?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'focus_sessions_micro_task_id_fkey'
+            columns: ['micro_task_id']
+            isOneToOne: false
+            referencedRelation: 'micro_tasks'
+            referencedColumns: ['id']
+          },
+        ]
       }
     }
     Views: { [_ in never]: never }

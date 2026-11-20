@@ -290,10 +290,11 @@ Komponen dari Component Library:
 **Ditunda setelah lomba:**
 - Google OAuth
 - Cloudflare Turnstile
-- Statistik/riwayat sesi fokus
 - i18n
 - Service Worker untuk notifikasi tepat waktu
 - Green Gradient
+
+**Catatan pembaruan (2026-11-21):** "Statistik/riwayat sesi fokus" tidak lagi ditunda. Profil (ganti nama, foto, email), reset kata sandi, dan aturan kata sandi (minimal 8 karakter) kini masuk scope. Skema tambahan ada di `supabase/migrations/0002_ui_slicing.sql`; rinciannya di `.scratch/lumen-figma-slicing/spec.md`.
 
 **Risiko:**
 - Notifikasi bisa terlambat saat tab di-throttle browser.

@@ -24,8 +24,10 @@ Butuh Node 22.22 atau lebih baru (disarankan Node 24 LTS).
 2. Siapkan Supabase (sekali saja):
    1. Buat project di [supabase.com](https://supabase.com).
    2. Buka **Authentication > Sign In / Providers**, lalu aktifkan **Anonymous sign-ins** (dipakai tombol "Coba tanpa daftar").
-   3. Buka **SQL Editor**, lalu jalankan isi `supabase/migrations/0001_init.sql`.
-   4. Salin **Project URL** dan **Publishable key** dari **Project Settings > API Keys**.
+   3. Buka **SQL Editor**, lalu jalankan isi `supabase/migrations/0001_init.sql`, kemudian `supabase/migrations/0002_ui_slicing.sql`.
+   4. Buka **Authentication > Sign In / Providers > Email**, lalu set panjang minimal kata sandi menjadi 8.
+   5. Di **Authentication > URL Configuration**, tambahkan `<origin>/reset-password` (lokal dan Vercel) ke Redirect URLs.
+   6. Salin **Project URL** dan **Publishable key** dari **Project Settings > API Keys**.
 
 3. Buat file `.env.local` dari contoh, lalu isi kedua nilainya:
 
