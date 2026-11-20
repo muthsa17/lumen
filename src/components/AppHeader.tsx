@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { DropdownMenu } from 'radix-ui'
 import { Link, NavLink } from 'react-router'
 import { Button } from '@/components/ui/button'
@@ -23,10 +24,10 @@ import { cn } from '@/lib/utils'
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
   cn(
-    'inline-flex h-11 items-center rounded-lg px-4 text-body font-semibold transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none',
+    'inline-flex h-11 items-center border-b-2 px-1 text-body font-semibold transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none',
     isActive
-      ? 'bg-mint text-emerald-deep'
-      : 'text-muted-foreground hover:bg-muted hover:text-ink',
+      ? 'border-emerald-deep text-emerald-deep'
+      : 'border-transparent text-ink-soft hover:text-ink',
   )
 
 const NAV = [
@@ -51,18 +52,25 @@ export function AppHeader() {
 
   return (
     <header className="border-b bg-card">
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6 md:min-h-24">
         <Link
           to="/app"
-          className="rounded-md text-section font-bold text-ink focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+          className="inline-flex items-center gap-2 rounded-md text-section font-bold tracking-wider text-emerald-deep focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
         >
+          <img
+            src="/logo.png"
+            alt=""
+            width={32}
+            height={32}
+            className="size-8 rounded-full"
+          />
           LUMEN
         </Link>
-        <p className="hidden text-body text-ink-soft lg:block">
+        <p className="ml-2 hidden border-l pl-4 text-body text-ink-soft lg:block">
           {todayLabel()}
         </p>
 
-        <nav aria-label="Utama" className="ml-4 hidden gap-1 md:flex">
+        <nav aria-label="Utama" className="ml-4 hidden gap-6 md:flex">
           {NAV.map((n) => (
             <NavLink key={n.to} to={n.to} className={navClass}>
               {n.label}
@@ -79,6 +87,7 @@ export function AppHeader() {
               <EnergyIcon aria-hidden="true" className="size-5" />
               <span className="hidden sm:inline">Energi Mental:</span>{' '}
               {ENERGY_COPY[level].label}
+              <ChevronDown aria-hidden="true" className="size-4" />
             </DropdownMenu.Trigger>
             <DropdownMenu.Portal>
               <DropdownMenu.Content
@@ -110,7 +119,7 @@ export function AppHeader() {
           <DropdownMenu.Root modal={false}>
             <DropdownMenu.Trigger
               aria-label="Menu akun"
-              className="grid size-11 cursor-pointer place-items-center rounded-full bg-emerald-deep text-body font-semibold text-primary-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
+              className="grid size-11 cursor-pointer place-items-center rounded-full border bg-mint text-body font-semibold text-emerald-deep focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
             >
               {initials(user?.user_metadata?.full_name, user?.email)}
             </DropdownMenu.Trigger>
