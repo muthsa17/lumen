@@ -28,3 +28,22 @@
 - Seam tes: `src/lib/recovery.ts` (`resetPasswordError`). Halaman tidak punya tes otomatis.
 - Checklist diekstrak ke `PasswordRules` (dipakai Register dan ResetPassword).
 - **Belum dicek**: kriteria manual lewat email asli dan pengecekan browser/Figma (`.env.local` tidak ada, CLI `orca browser` tidak tersedia). Kriteria "Cek manual alur penuh" sengaja dibiarkan tidak tercentang. Pastikan `<origin>/reset-password` terdaftar di Supabase Auth > URL Configuration.
+
+## Comments
+
+**File yang diubah/dibuat:** `src/pages/ForgotPassword.tsx`, `src/pages/ResetPassword.tsx`, `src/lib/recovery.ts` + `recovery.test.ts`, `src/features/auth/PasswordRules.tsx` (diekstrak, dipakai juga oleh Register), `src/routes.tsx`.
+
+**Penggantian warna untuk AA:** tidak ada penggantian baru. Teks hijau dan tombol utama memakai `emerald-deep`, sesuai CLAUDE.md.
+
+**Langkah manual Supabase:**
+- Daftarkan `<origin>/reset-password` (localhost dan URL Vercel) di Auth > URL Configuration > Redirect URLs.
+- Pastikan template email "Reset Password" aktif dan SMTP bisa mengirim.
+
+**Yang perlu dicek di browser** (belum bisa dicek agen: tidak ada `.env.local`, CLI `orca browser` tidak tersedia):
+1. `/forgot-password`: kirim email terdaftar dan tidak terdaftar, pesan sukses harus sama. Bandingkan dengan Figma `166:906`.
+2. Buka tautan dari email asli, harus mendarat di `/reset-password` dengan form (Figma `166:1031`), checklist aturan kata sandi, dan konfirmasi.
+3. Simpan kata sandi baru, harus masuk ke `/app`. Coba login ulang dengan kata sandi baru.
+4. Buka `/reset-password` langsung tanpa tautan (dan sebagai tamu): harus tampil pesan kedaluwarsa + link ke `/forgot-password`.
+5. Link "Kembali ke halaman masuk", keyboard (Tab/Enter), lebar mobile dan desktop.
+
+Build, lint, dan tes (38) lulus saat diperiksa ulang.
