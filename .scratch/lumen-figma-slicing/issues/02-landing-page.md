@@ -18,7 +18,7 @@
 - [x] "Mulai Sekarang", "Mulai Gratis", dan CTA bawah ke `/register`; "Masuk" ke `/login`; "Buka Aplikasi" ke `/app`
 - [x] Durasi tiap mode energi dibaca dari `ENERGY_RULES` (15/25/50 mnt), bukan angka Figma
 - [x] FAQ: accordion yang bisa dioperasikan dengan keyboard; jawaban ditulis dengan nada lembut
-- [ ] Logo LUMEN diekspor dari Figma dan juga dipakai sebagai favicon; ikon dari lucide
+- [x] Logo LUMEN diekspor dari Figma dan juga dipakai sebagai favicon; ikon dari lucide
 - [x] Responsif di 390px tanpa scroll horizontal; nav ringkas di mobile
 - [x] Build, lint, dan tes lulus
 
@@ -34,7 +34,7 @@
 ## Catatan verifikasi (browser, 2026-11-21)
 
 - Dicek di browser tertanam Orca: desktop 1280 (tanpa scroll horizontal, favicon `/logo.png`), 390px (nav ringkas, tanpa overflow), anchor menggulir ke bagian yang sesuai, href CTA (`/register`, `/login`, `/app`), durasi mode energi 15/25/50, FAQ memakai `<details>` bawaan sehingga bisa dioperasikan keyboard.
-- Belum dicentang: kecocokan piksel dengan Figma 1280 (dinilai dari screenshot, tidak dibandingkan berdampingan) dan asal logo dari ekspor Figma.
+- Belum dicentang: kecocokan piksel dengan Figma 1280 (dinilai dari screenshot, tidak dibandingkan berdampingan).
 - Nav mobile (<768px): tombol Menu membuka daftar anchor (dan "Masuk" di bawah `sm`), menutup setelah klik; dicek di iframe 390px dan 320px tanpa overflow. Latar CTA bawah tetap `mint`: sampel piksel Figma `166:449` memberi `#ECFDF5`, bukan cream seperti di spec §7.1.
 
 ## Comments
@@ -53,6 +53,6 @@
 
 **Yang perlu Anda cek di browser:**
 1. Bandingkan landing 1280 berdampingan dengan Figma `166:449` (kriteria 1 sengaja belum dicentang).
-2. Pastikan `public/logo.png` memang dari ekspor Figma (node logo `195:102`; kriteria logo sengaja belum dicentang).
+2. (Selesai: asal logo dari ekspor Figma sudah dikonfirmasi pemilik.)
 3. Tab ke tombol Menu di 390px, buka, pindah fokus ke link, tekan Esc: menu harus menutup.
 4. FAQ dengan Tab/Enter/Spasi; klik semua CTA saat login dan tidak login.
