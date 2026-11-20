@@ -11,7 +11,7 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** ready-for-human
 
 - [ ] Tampilan desktop 1280 sesuai Figma; teks yang gagal AA diganti token yang lolos AA, dan tiap penggantian dicatat
 - [x] Link Fitur/Cara Kerja/Energi Mental/Tanya Jawab menggulir ke bagian yang sesuai
@@ -36,3 +36,23 @@
 - Dicek di browser tertanam Orca: desktop 1280 (tanpa scroll horizontal, favicon `/logo.png`), 390px (nav ringkas, tanpa overflow), anchor menggulir ke bagian yang sesuai, href CTA (`/register`, `/login`, `/app`), durasi mode energi 15/25/50, FAQ memakai `<details>` bawaan sehingga bisa dioperasikan keyboard.
 - Belum dicentang: kecocokan piksel dengan Figma 1280 (dinilai dari screenshot, tidak dibandingkan berdampingan) dan asal logo dari ekspor Figma.
 - Nav mobile (<768px): tombol Menu membuka daftar anchor (dan "Masuk" di bawah `sm`), menutup setelah klik; dicek di iframe 390px dan 320px tanpa overflow. Latar CTA bawah tetap `mint`: sampel piksel Figma `166:449` memberi `#ECFDF5`, bukan cream seperti di spec §7.1.
+
+## Comments
+
+**File yang diubah (sejak `c175c4f`, bagian landing):** `src/pages/Landing.tsx`, `src/lib/landing.ts`, `src/lib/landing.test.ts`, `index.html` (favicon), `public/logo.png`. Sesi ini hanya menambah satu perbaikan: Esc kini menutup menu mobile dari fokus mana pun (handler dipindah ke `<header>`).
+
+**Penggantian warna untuk AA:** tidak ada teks Figma yang gagal AA. Hanya pemetaan token: `#4B5563` → `ink-soft`, `#047857` → `emerald-deep`. `primary` = `#047857` dengan teks `#fefefe`.
+
+**Langkah manual Supabase:** tidak ada.
+
+**Hasil review:**
+- Standar: Esc menu mobile (diperbaiki). Saran gaya yang tidak diubah: ukuran heading arbitrer (`text-[2.5rem]` dll.), kelas link nav berulang, `FEATURE_ICONS` paralel dengan `FEATURES`, `focusMin` hanya dipakai tes, "Gratis selamanya" belum tentu didukung PRD.
+- Spec: "diarahkan ke dasbor" diimplementasikan sebagai tombol "Buka Aplikasi" dan CTA ke `/app` untuk pengguna login, bukan redirect otomatis. Saya pilih itu karena user story 6 menyebut "Masuk atau Buka Aplikasi membawa saya ke dasbor". Beri tahu saya kalau Anda memang ingin redirect otomatis.
+- Selama `loading`, area CTA nav kosong lalu terisi (sedikit layout shift).
+- Catatan implementasi soal `/register` yang belum ada sudah usang: rutenya kini ada.
+
+**Yang perlu Anda cek di browser:**
+1. Bandingkan landing 1280 berdampingan dengan Figma `166:449` (kriteria 1 sengaja belum dicentang).
+2. Pastikan `public/logo.png` memang dari ekspor Figma (node logo `195:102`; kriteria logo sengaja belum dicentang).
+3. Tab ke tombol Menu di 390px, buka, pindah fokus ke link, tekan Esc: menu harus menutup.
+4. FAQ dengan Tab/Enter/Spasi; klik semua CTA saat login dan tidak login.

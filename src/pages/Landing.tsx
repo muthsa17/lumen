@@ -157,7 +157,10 @@ export default function Landing() {
 
   return (
     <div className="min-h-dvh bg-background">
-      <header className="sticky top-0 z-10 border-b border-border bg-card">
+      <header
+        className="sticky top-0 z-10 border-b border-border bg-card"
+        onKeyDown={(e) => e.key === 'Escape' && setMenuOpen(false)}
+      >
         <div
           className={cn(
             container,
@@ -195,7 +198,6 @@ export default function Landing() {
               aria-controls="menu-mobile"
               aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
               onClick={() => setMenuOpen((o) => !o)}
-              onKeyDown={(e) => e.key === 'Escape' && setMenuOpen(false)}
               className={cn(
                 'grid size-11 place-items-center rounded-md text-ink md:hidden',
                 focusRing,
