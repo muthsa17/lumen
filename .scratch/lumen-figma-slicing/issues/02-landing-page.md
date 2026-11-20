@@ -14,3 +14,12 @@
 - [ ] Logo LUMEN diekspor dari Figma dan juga dipakai sebagai favicon; ikon dari lucide
 - [ ] Responsif di 390px tanpa scroll horizontal; nav ringkas di mobile
 - [ ] Build, lint, dan tes lulus
+
+## Catatan implementasi
+
+- Audit AA pada frame `166:449` (piksel teks vs latar): teks hijau Figma sudah `#047857` (4,99–5,21:1) dan abu `#4B5563` (6,87:1). Tidak ada teks Figma yang gagal AA. Penggantian hanya pemetaan token: `#4B5563` → `ink-soft` (`#333`, lebih gelap), `#047857` → `emerald-deep`.
+- Durasi Figma (5/15/25 mnt) diganti nilai `ENERGY_RULES` (15/25/50 mnt) di kartu mode, fitur Timer, dan kartu pratinjau hero (50:00, Fokus Tinggi). Chip "+5m" di kartu pratinjau dihapus karena tidak ada di aplikasi.
+- Copy Figma yang berbahasa Inggris atau berklaim ADHD disesuaikan: judul hero jadi "Sedikit fokus. Sedikit kemajuan.", badge jadi "Pendamping fokus yang tenang".
+- `/register` belum ada sampai issue 03; sementara rute tak dikenal jatuh ke `/`.
+- Tombol "Coba tanpa daftar" (tamu) dihapus dari landing; ditangani di issue 04.
+- Logo: `public/logo.png` (256px dari ekspor Figma `195:104`), dipakai juga sebagai favicon.
