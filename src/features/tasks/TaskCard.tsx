@@ -1,6 +1,5 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, Trash2, Plus, Calendar } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
@@ -13,53 +12,114 @@ import { cn } from '@/lib/utils'
 
 type Api = Pick<TasksApi, 'deleteTask' | 'addMicroTask' | 'updateMicroTask' | 'deleteMicroTask'>
 
-export function TaskCard({ task, steps, api }: { task: Task; steps: MicroTask[]; api: Api }) {
+export function TaskCard({
+  task,
+  steps,
+  api,
+  selectedStepId,
+}: {
+  task: Task
+  steps: MicroTask[]
+  api: Api
+  selectedStepId?: string
+}) {
   const [confirmOpen, setConfirmOpen] = useState(false)
   const done = steps.filter((s) => s.is_done).length
   const percent = steps.length ? Math.round((done / steps.length) * 100) : 0
+  const estimatedMin = steps.length * 15
 
   return (
-    <article className="rounded-xl border bg-card p-4 sm:p-5" aria-labelledby={`task-${task.id}`}>
-      <div className="flex items-start gap-3">
+    <article
+      className="rounded-[20px] border border-border bg-white p-6 shadow-xs sm:p-[25px]"
+      aria-labelledby={`task-${task.id}`}
+    >
+      <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 id={`task-${task.id}`} className="text-card-title font-semibold break-words">
-            {task.title}
-          </h3>
+          <div className="flex flex-wrap items-center gap-3">
+            <h3 id={`task-${task.id}`} className="font-heading text-h2 font-semibold tracking-tight text-neutral-darker break-words">
+              {task.title}
+            </h3>
+            <span className="inline-flex items-center rounded-full border border-green-light-hover bg-green-light px-2.5 py-0.5 font-heading text-body-4 font-medium text-green">
+              Aktif
+            </span>
+          </div>
           {(task.course || task.deadline) && (
-            <p className="mt-1 text-body text-muted-foreground">
+            <p className="mt-1 text-body-1 text-neutral">
               {[task.course, task.deadline && `Tenggat ${dayLabel(task.deadline)}`].filter(Boolean).join(' · ')}
             </p>
           )}
         </div>
-        <Button variant="ghost" size="icon" aria-label={`Hapus tugas ${task.title}`} onClick={() => setConfirmOpen(true)}>
-          <Trash2 aria-hidden="true" />
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className="text-neutral hover:bg-neutral-light hover:text-danger"
+          aria-label={`Hapus tugas ${task.title}`}
+          onClick={() => setConfirmOpen(true)}
+        >
+          <Trash2 className="size-4" />
         </Button>
       </div>
 
-      <div className="mt-3 flex items-center gap-3">
-        <Progress value={percent} aria-label={`Progres ${task.title}`} className="h-2 flex-1" />
-        <span className="shrink-0 text-body text-muted-foreground">
-          {done}/{steps.length} langkah
-        </span>
+      <div className="mt-4 space-y-2">
+        <div className="flex items-center justify-between text-body-3">
+          <span className="font-medium text-neutral">Progres keseluruhan</span>
+          <span className="font-heading font-semibold text-green">{percent}% selesai</span>
+        </div>
+        <Progress value={percent} aria-label={`Progres ${task.title}`} className="h-3" />
       </div>
 
-      {steps.length > 0 ? (
-        <ul className="mt-3 grid gap-2">
-          {steps.map((s) => (
-            <StepRow key={s.id} step={s} api={api} />
-          ))}
-        </ul>
-      ) : (
-        <p className="mt-3 text-body text-muted-foreground">Belum ada langkah. Mulai dari yang paling kecil, misalnya "cari 3 referensi".</p>
-      )}
+      <div className="mt-6 border-t border-border pt-6 space-y-3">
+        <div className="flex items-center justify-between">
+          <p className="font-heading text-body-3 font-semibold tracking-[0.6px] text-neutral uppercase">
+            LANGKAH KECIL
+          </p>
+          <span className="text-body-4 font-medium text-neutral">
+            {done}/{steps.length} selesai
+          </span>
+        </div>
 
-      <AddStepForm taskId={task.id} onAdd={api.addMicroTask} />
+        {steps.length > 0 ? (
+          <ul className="space-y-3">
+            {steps.map((s) => (
+              <StepRow
+                key={s.id}
+                step={s}
+                api={api}
+                isSelected={selectedStepId === s.id && !s.is_done}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p className="rounded-[16px] border border-dashed border-border p-5 text-center text-body-2 text-neutral">
+            Belum ada langkah. Mulai dari yang paling kecil, misalnya "baca 2 artikel referensi".
+          </p>
+        )}
+      </div>
+
+      <div className="mt-5 border-t border-border pt-4">
+        <AddStepForm taskId={task.id} onAdd={api.addMicroTask} />
+      </div>
+
+      {steps.length > 0 && (
+        <div className="mt-4 flex items-center justify-between text-body-3 border-t border-border pt-4">
+          <span className="font-medium text-neutral">
+            {steps.length} tugas mikro · perkiraan {estimatedMin} mnt
+          </span>
+          <span className="font-medium text-green">
+            Siap kapan pun kamu nyaman
+          </span>
+        </div>
+      )}
 
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle className="text-card-title">Hapus "{task.title}"?</DialogTitle>
-            <DialogDescription className="text-body">Semua langkah di dalamnya ikut terhapus dan tidak bisa dikembalikan.</DialogDescription>
+            <DialogTitle className="font-heading text-h3 font-bold text-neutral-darker">
+              Hapus "{task.title}"?
+            </DialogTitle>
+            <DialogDescription className="text-body-2 text-muted-foreground">
+              Semua langkah di dalamnya ikut terhapus dan tidak bisa dikembalikan.
+            </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setConfirmOpen(false)}>
@@ -75,7 +135,15 @@ export function TaskCard({ task, steps, api }: { task: Task; steps: MicroTask[];
   )
 }
 
-export function StepRow({ step, api }: { step: MicroTask; api: Pick<Api, 'updateMicroTask' | 'deleteMicroTask'> }) {
+export function StepRow({
+  step,
+  api,
+  isSelected = false,
+}: {
+  step: MicroTask
+  api: Pick<Api, 'updateMicroTask' | 'deleteMicroTask'>
+  isSelected?: boolean
+}) {
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(step.title)
   const id = `step-${step.id}`
@@ -90,52 +158,94 @@ export function StepRow({ step, api }: { step: MicroTask; api: Pick<Api, 'update
 
   return (
     <li
-      // Figma "Selected" state, shown while any control in the row has focus.
       className={cn(
-        'flex min-h-15 items-center gap-3 rounded-lg border bg-card py-2 pr-2 pl-4 transition-colors focus-within:border-emerald focus-within:bg-mint',
-        step.is_done && 'bg-muted/60',
+        'group relative flex min-h-[58px] items-center justify-between gap-3.5 rounded-[20px] border p-4 transition-all',
+        isSelected
+          ? 'border-2 border-green bg-green-light shadow-xs'
+          : 'border-border bg-white hover:border-border/80',
       )}
     >
-      <Checkbox id={id} checked={step.is_done} onCheckedChange={(v) => api.updateMicroTask(step.id, { is_done: v === true })} />
-      {editing ? (
-        <form onSubmit={save} className="min-w-0 flex-1">
-          <label htmlFor={`${id}-edit`} className="sr-only">
-            Ubah langkah
+      <div className="flex min-w-0 flex-1 items-center gap-3.5">
+        <Checkbox
+          id={id}
+          checked={step.is_done}
+          onCheckedChange={(v) => api.updateMicroTask(step.id, { is_done: v === true })}
+          className={cn(isSelected && !step.is_done && 'border-green')}
+        />
+
+        {editing ? (
+          <form onSubmit={save} className="min-w-0 flex-1">
+            <label htmlFor={`${id}-edit`} className="sr-only">
+              Ubah langkah
+            </label>
+            <Input
+              id={`${id}-edit`}
+              autoFocus
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onBlur={() => save()}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  setDraft(step.title)
+                  setEditing(false)
+                }
+              }}
+              className="h-9 text-body-1"
+            />
+          </form>
+        ) : (
+          <label htmlFor={id} className="min-w-0 flex-1 cursor-pointer">
+            <span
+              className={cn(
+                'block break-words text-body-2 font-medium tracking-[0.1px] transition-colors',
+                step.is_done
+                  ? 'text-neutral/60 line-through'
+                  : isSelected
+                    ? 'font-semibold text-green'
+                    : 'text-neutral-darker',
+              )}
+            >
+              {step.title}
+            </span>
+            {isSelected && !step.is_done ? (
+              <span className="block text-body-3 font-medium text-neutral-darker">
+                Dipilih untuk sesi fokusmu berikutnya
+              </span>
+            ) : (
+              <span className="text-body-4 text-neutral">
+                {dayLabel(step.planned_date)}
+              </span>
+            )}
           </label>
-          <Input
-            id={`${id}-edit`}
-            autoFocus
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            onBlur={() => save()}
-            onKeyDown={(e) => {
-              if (e.key === 'Escape') {
-                setDraft(step.title)
-                setEditing(false)
-              }
-            }}
-          />
-        </form>
-      ) : (
-        <label htmlFor={id} className="min-w-0 flex-1 cursor-pointer">
-          <span className={step.is_done ? 'block break-words text-body text-muted-foreground line-through' : 'block break-words text-body text-ink-soft'}>{step.title}</span>
-          {/* Narrow screens: badge sits under the title so the title keeps its width. */}
-          <Badge variant="muted" className="mt-1 sm:hidden">
-            {dayLabel(step.planned_date)}
-          </Badge>
-        </label>
-      )}
-      {!editing && (
-        <Button variant="ghost" size="icon" aria-label={`Ubah langkah ${step.title}`} onClick={() => setEditing(true)}>
-          <Pencil aria-hidden="true" />
+        )}
+      </div>
+
+      <div className="flex shrink-0 items-center gap-2">
+        <span className="rounded-full bg-neutral-light px-3 py-1 font-heading text-body-3 font-medium text-neutral">
+          15 mnt
+        </span>
+
+        {!editing && (
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            className="opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100"
+            aria-label={`Ubah langkah ${step.title}`}
+            onClick={() => setEditing(true)}
+          >
+            <Pencil className="size-3.5 text-neutral hover:text-neutral-darker" />
+          </Button>
+        )}
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="opacity-0 transition-opacity group-hover:opacity-100 focus:opacity-100"
+          aria-label={`Hapus langkah ${step.title}`}
+          onClick={() => api.deleteMicroTask(step.id)}
+        >
+          <Trash2 className="size-3.5 text-neutral hover:text-danger" />
         </Button>
-      )}
-      <Button variant="ghost" size="icon" aria-label={`Hapus langkah ${step.title}`} onClick={() => api.deleteMicroTask(step.id)}>
-        <Trash2 aria-hidden="true" />
-      </Button>
-      <Badge variant="muted" className="max-sm:hidden">
-        {dayLabel(step.planned_date)}
-      </Badge>
+      </div>
     </li>
   )
 }
@@ -143,6 +253,7 @@ export function StepRow({ step, api }: { step: MicroTask; api: Pick<Api, 'update
 function AddStepForm({ taskId, onAdd }: { taskId: string; onAdd: TasksApi['addMicroTask'] }) {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState(todayLocal())
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const titleId = `new-step-${taskId}`
   const dateId = `new-step-date-${taskId}`
 
@@ -150,23 +261,46 @@ function AddStepForm({ taskId, onAdd }: { taskId: string; onAdd: TasksApi['addMi
     e.preventDefault()
     const clean = title.trim()
     if (!clean) return
+    setIsSubmitting(true)
     await onAdd({ task_id: taskId, title: clean, planned_date: date })
+    setIsSubmitting(false)
     setTitle('')
   }
 
   return (
-    <form onSubmit={submit} className="mt-3 grid grid-cols-[1fr_auto] gap-2">
-      <label htmlFor={titleId} className="sr-only">
-        Langkah baru
-      </label>
-      <Input id={titleId} value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Langkah kecil berikutnya" className="col-span-2" />
-      <label htmlFor={dateId} className="sr-only">
-        Rencana dikerjakan
-      </label>
-      <Input id={dateId} type="date" required value={date} onChange={(e) => setDate(e.target.value)} />
-      <Button type="submit" variant="outline" disabled={!title.trim()}>
-        Tambah langkah
-      </Button>
+    <form onSubmit={submit} className="flex flex-col gap-2 sm:flex-row sm:items-center">
+      <div className="relative flex-1">
+        <Plus className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-neutral" />
+        <Input
+          id={titleId}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Langkah kecil berikutnya"
+          className="h-10 rounded-[10px] pl-9 text-body-2"
+        />
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="relative">
+          <Calendar className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-neutral" />
+          <Input
+            id={dateId}
+            type="date"
+            required
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            className="h-10 w-[140px] rounded-[10px] pl-8 pr-2 text-body-3"
+          />
+        </div>
+        <Button
+          type="submit"
+          variant="secondary"
+          size="sm"
+          disabled={!title.trim() || isSubmitting}
+          className="h-10 shrink-0 rounded-[10px] px-3 font-medium"
+        >
+          {isSubmitting ? 'Menambah…' : '+ Langkah'}
+        </Button>
+      </div>
     </form>
   )
 }

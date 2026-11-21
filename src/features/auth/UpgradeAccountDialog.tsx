@@ -39,29 +39,35 @@ export function UpgradeAccountDialog({ open, onOpenChange, onPasswordSet }: Prop
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-card-title">{verified ? 'Buat password' : 'Simpan datamu dengan email'}</DialogTitle>
-          <DialogDescription className="text-body">
+          <DialogTitle className="font-heading text-h3 font-bold text-neutral-darker">
+            {verified ? 'Buat password' : 'Simpan datamu dengan email'}
+          </DialogTitle>
+          <DialogDescription className="text-body-2 text-muted-foreground leading-relaxed">
             {verified
               ? `Email ${user?.email} sudah terverifikasi. Buat password untuk masuk lagi nanti.`
               : pending
                 ? `Link verifikasi sudah dikirim ke ${user?.new_email}. Klik link itu dulu, atau kirim ulang ke email lain.`
-                : 'Semua tugas dan check-in yang sudah kamu buat sebagai tamu tetap tersimpan.'}
+                : 'Semua tugas dan check-in yang sudah kamu buat sebagai tamu tetap tersimpan secara permanen.'}
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={submit} className="space-y-3">
-          <label htmlFor="upgrade-field" className="text-body font-semibold">
-            {verified ? 'Password baru' : 'Email'}
-          </label>
-          <Input
-            id="upgrade-field"
-            type={verified ? 'password' : 'email'}
-            autoComplete={verified ? 'new-password' : 'email'}
-            required
-            minLength={verified ? 6 : undefined}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-          <Button type="submit" disabled={busy} className="w-full">
+        <form onSubmit={submit} className="mt-2 space-y-4">
+          <div className="space-y-1.5">
+            <label htmlFor="upgrade-field" className="text-body-2 font-semibold text-neutral-darker">
+              {verified ? 'Password baru' : 'Alamat Email'}
+            </label>
+            <Input
+              id="upgrade-field"
+              type={verified ? 'password' : 'email'}
+              autoComplete={verified ? 'new-password' : 'email'}
+              required
+              minLength={verified ? 6 : undefined}
+              value={value}
+              onChange={(e) => setValue(e.target.value)}
+              placeholder={verified ? 'Minimal 6 karakter' : 'nama@kampus.ac.id'}
+              className="h-11"
+            />
+          </div>
+          <Button type="submit" disabled={busy} className="h-11 w-full font-heading text-body-1 font-semibold">
             {busy ? 'Memproses…' : verified ? 'Simpan password' : 'Kirim link verifikasi'}
           </Button>
         </form>

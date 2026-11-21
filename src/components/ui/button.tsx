@@ -4,36 +4,30 @@ import { cn } from "@/lib/utils"
 import { Slot } from "radix-ui"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-body font-semibold whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-[12px] border border-transparent bg-clip-padding font-heading font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-2 aria-invalid:ring-destructive/20 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
-        default:
-          // Figma: disabled primary is a mint fill, not a faded emerald.
-          "bg-primary text-primary-foreground hover:bg-emerald-deeper active:bg-emerald-deeper disabled:bg-mint disabled:text-muted-foreground disabled:opacity-100",
+        default: "bg-primary text-primary-foreground hover:bg-green-hover active:bg-green-active shadow-xs",
         outline:
-          "border-input bg-card text-ink hover:bg-muted hover:text-ink aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "border-border bg-card text-neutral-darker hover:bg-neutral-light hover:text-neutral-darker aria-expanded:bg-neutral-light",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-gold/70 active:bg-gold/60 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "bg-green-light border border-green-light-active text-green hover:bg-green-light-hover active:bg-green-light-active aria-expanded:bg-green-light",
         ghost:
-          "text-muted-foreground hover:bg-muted hover:text-ink aria-expanded:bg-muted aria-expanded:text-ink dark:hover:bg-muted/50",
+          "hover:bg-neutral-light hover:text-neutral-darker aria-expanded:bg-neutral-light",
         destructive:
-          // Text on #F1323E fails WCAG AA (white ~4.0:1, ink ~4.45:1), so danger is carried by the border, not the fill.
-          "border-danger bg-card text-ink hover:bg-danger/10 active:bg-danger/20 focus-visible:border-danger focus-visible:ring-danger/30",
-        link: "text-emerald-deep underline-offset-4 hover:underline",
+          "border-danger bg-card text-danger hover:bg-danger/10 active:bg-danger/20 focus-visible:border-danger focus-visible:ring-danger/30",
+        link: "text-green hover:text-green-dark underline-offset-4 hover:underline",
       },
       size: {
-        default:
-          "h-11 gap-2 px-4 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        xs: "h-6 gap-1 rounded-[min(var(--radius-md),10px)] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-7 gap-1 rounded-[min(var(--radius-md),12px)] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-12 gap-2 px-6 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2",
-        icon: "size-11",
-        "icon-xs":
-          "size-6 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm":
-          "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
-        "icon-lg": "size-9",
+        default: "h-11 gap-2 px-4 text-body-2",
+        xs: "h-7 gap-1 rounded-md px-2 text-body-4 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-9 gap-1.5 rounded-[10px] px-3 text-body-3 [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "h-[52px] gap-2.5 px-6 text-body-1",
+        icon: "size-11 rounded-[12px]",
+        "icon-sm": "size-9 rounded-[10px]",
+        "icon-xs": "size-7 rounded-md [&_svg:not([class*='size-'])]:size-3",
+        "icon-lg": "size-[52px] rounded-[12px]",
       },
     },
     defaultVariants: {

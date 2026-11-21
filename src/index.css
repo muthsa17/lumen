@@ -1,49 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400..800;1,400..800&family=Poppins:ital,wght@0,400..800;1,400..800&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Design system LUMEN, sumber: Figma cEhdAQvduiD4OwOHK5UQdh, Foundations (100:95) & Component Library (100:237). Lihat spec §7. */
+/* Design system LUMEN, disinkronkan dengan Figma Hi-Fi Final (Nodes 166-274 & 166-449) */
 @theme {
-  /* Figma: "One family". Poppins untuk semua teks. */
-  --font-sans: "Poppins", sans-serif;
+  --font-heading: "Poppins", sans-serif;
+  --font-sans: "Nunito", sans-serif;
 
-  --color-ink: #252525;
-  --color-ink-soft: #333333;
+  --color-ink: #1f2937;
+  --color-maroon: #3b0000;
 
-  --color-mint: #e6f7f0;
-  --color-soft-mint: #a7f3d0;
+  /* Primary Green (Figma Final: #047857 / Emerald 700) */
+  --color-green-light: #ecfdf5;
+  --color-green-light-hover: #d1fae5;
+  --color-green-light-active: #a7f3d0;
+  --color-green: #047857;
+  --color-green-hover: #065f46;
+  --color-green-active: #064e3b;
+  --color-green-dark: #065f46;
+  --color-green-dark-hover: #064e3b;
+  --color-green-darker: #022c22;
+
+  /* Aliases for semantic/legacy compatibility across dev branch */
+  --color-mint: #ecfdf5;
+  --color-soft-mint: #d1fae5;
   --color-emerald-hover: #10b981;
-  /* #059669 gagal AA untuk teks di atas putih/mint; pakai untuk elemen non-teks saja. Spec §7.5. */
-  --color-emerald: #059669;
+  --color-emerald: #047857;
   --color-emerald-deep: #047857;
-  /* Di luar palet Figma: hover untuk tombol primary #047857. */
   --color-emerald-deeper: #065f46;
-
+  --color-ink-soft: #4b5563;
   --color-cream: #fef9c3;
   --color-gold: #fde68a;
   --color-amber: #f59e0b;
 
-  --color-danger: #ef4444;
+  /* Secondary / Accent Warm (Figma Yellow / Warm: #fef3c7, #f59e0b) */
+  --color-yellow-light: #fef3c7;
+  --color-yellow-light-hover: #fde68a;
+  --color-yellow-light-active: #fcd34d;
+  --color-yellow: #f59e0b;
+  --color-yellow-hover: #d97706;
+  --color-yellow-active: #b45309;
+  --color-yellow-dark: #b45309;
+  --color-yellow-dark-hover: #92400e;
+  --color-yellow-darker: #78350f;
+
+  /* Neutrals (Figma Final: background #f4f4f4, headings #1f2937, body #4b5563, muted #9ca3af, border #e5e7eb) */
+  --color-neutral-light: #f4f4f4;
+  --color-neutral-light-hover: #f3f4f6;
+  --color-neutral-light-active: #e5e7eb;
+  --color-neutral: #6b7280;
+  --color-neutral-hover: #4b5563;
+  --color-neutral-active: #4b5563;
+  --color-neutral-dark: #374151;
+  --color-neutral-dark-active: #1f2937;
+  --color-neutral-darker: #1f2937;
+
+  /* Status */
+  --color-danger: #f1323e;
   --color-warning: #f59e0b;
-  --color-success: #10b981;
+  --color-success: #047857;
 
-  --text-hero: 28px;
-  --text-hero--line-height: 36px;
-  --text-hero--font-weight: 700;
-  --text-section: 20px;
-  --text-section--line-height: 28px;
-  --text-section--font-weight: 700;
-  --text-card-title: 16px;
-  --text-card-title--line-height: 24px;
-  --text-card-title--font-weight: 600;
-  --text-body: 14px;
-  --text-body--line-height: 22px;
-  --text-caption: 12px;
-  --text-caption--line-height: 16px;
-  --text-caption--font-weight: 500;
+  /* Typography Scales (Figma Hi-Fi: Display 56px, Hero 40px, H1 28px, H2 22px, H3 18px, H4 16px) */
+  --text-display: 56px;
+  --text-display--line-height: 1.15;
+  --text-hero: 40px;
+  --text-hero--line-height: 1.2;
+  --text-h1: 28px;
+  --text-h1--line-height: 1.3;
+  --text-h2: 22px;
+  --text-h2--line-height: 1.35;
+  --text-h3: 18px;
+  --text-h3--line-height: 1.4;
+  --text-h4: 16px;
+  --text-h4--line-height: 1.4;
+  --text-h5: 14px;
+  --text-h5--line-height: 1.4;
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.55;
+  --text-body-1: 16px;
+  --text-body-1--line-height: 1.5;
+  --text-body-2: 14px;
+  --text-body-2--line-height: 1.5;
+  --text-body-3: 12px;
+  --text-body-3--line-height: 1.5;
+  --text-body-4: 10px;
+  --text-body-4--line-height: 1.5;
 
-  /* shadcn already derives radius-xl from --radius, so the container radius gets its own name. */
-  --radius-panel: 16px;
+  /* Container & Element Radii (Figma Final: cards 20px, buttons/inputs 12px, pills 9999px) */
+  --radius-panel: 20px;
+  --radius-card: 20px;
+  --radius-button: 12px;
+  --radius-input: 12px;
+  --radius-pill: 9999px;
+
+  /* Shadow (Figma: drop-shadow 0px 1px 2px rgba(0,0,0,0.05)) */
+  --shadow-card: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  --shadow-xs: 0px 1px 1px 0px rgba(0, 0, 0, 0.05);
   --shadow-lg: 0 12px 16px -4px #10182814, 0 4px 6px -2px #10182808;
 }
 
@@ -69,32 +122,31 @@
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
 }
 
 :root {
-  --radius: 10px;
+  --radius: 12px;
   --background: #f4f4f4;
-  --foreground: #333333;
-  --card: #fefefe;
-  --card-foreground: #333333;
-  --popover: #fefefe;
-  --popover-foreground: #333333;
-  /* Figma memakai putih di atas #059669 (3.74:1, gagal AA). #047857 memberi 5.44:1. Spec §7.5. */
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
   --primary: #047857;
-  --primary-foreground: #fefefe;
-  --secondary: #fde68a;
-  --secondary-foreground: #252525;
-  --muted: #f4f4f4;
-  /* Figma Muted Text #757575 gagal AA di atas #F4F4F4 (4.19:1). #6E6E6E memberi 4.64:1. */
-  --muted-foreground: #6e6e6e;
-  --accent: #e6f7f0;
+  /* Kontras teks putih #FFFFFF di atas #047857 adalah 5.89:1 (Lulus WCAG AA) */
+  --primary-foreground: #ffffff;
+  --secondary: #ecfdf5;
+  --secondary-foreground: #047857;
+  --muted: #f3f4f6;
+  --muted-foreground: #4b5563;
+  --accent: #ecfdf5;
   --accent-foreground: #047857;
-  --destructive: #ef4444;
+  --destructive: #f1323e;
   --border: #e5e7eb;
-  --input: #d1d5db;
-  --ring: #059669;
+  --input: #e5e7eb;
+  --ring: #047857;
 }
 
 @layer base {
@@ -102,10 +154,10 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
   }
   h1, h2, h3, h4, h5 {
-    @apply text-ink;
+    @apply font-heading text-neutral-darker tracking-tight;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled),
@@ -117,12 +169,6 @@
   }
   :disabled {
     cursor: not-allowed;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
   }
 }
 

@@ -1,0 +1,33 @@
+<svg width="232" height="232" viewBox="0 0 232 232" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="232" height="232" fill="#1E1E1E"/>
+<g id="LUMEN &#194;&#183; Student Dashboard &#194;&#183; Hi-Fi 1440">
+<rect width="1440" height="1070" transform="translate(-1031.6 -348)" fill="#F4F4F4"/>
+<g id="Dashboard body">
+<g id="Tasks and focus &#194;&#183; 65/35 grid">
+<g id="Adaptive focus and mindful break">
+<g id="Adaptive focus timer" filter="url(#filter0_d_2_4)">
+<rect x="-106" y="-87" width="442.4" height="538" rx="16" fill="#FEFEFE" shape-rendering="crispEdges"/>
+<rect x="-105.5" y="-86.5" width="441.4" height="537" rx="15.5" stroke="#E5E7EB" shape-rendering="crispEdges"/>
+<g id="Circular countdown">
+<g id="Countdown &#194;&#183; 25 minutes">
+<circle id="Minimal timer ring" cx="116" cy="116" r="111" fill="#FEFEFE" stroke-width="10" stroke="#E6F7F0"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_2_4" x="-122" y="-99" width="474.4" height="570" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="8"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.2 0 0 0 0 0.368627 0 0 0 0 0.313726 0 0 0 0.045 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_4"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2_4" result="shape"/>
+</filter>
+</defs>
+</svg>
